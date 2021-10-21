@@ -1,0 +1,20 @@
+version: '3'
+services:
+  web:
+    image: odoo:11
+    depends_on:
+      - db
+    ports:
+      - "8069:8069"
+    volumes:
+      - /var/lib/odoo:/var/lib/odoo
+      - /etc/odoo/config:/etc/odoo
+      - /mnt/odoo/custom_modules:/mnt/extra-addons
+  db:
+    image: postgres:latest
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=odoo
+    volumes:
+      - /var/lib:/var/lib
+      - /var/lib/postgresodoo:/var/lib/postgresql/data
+
